@@ -1,5 +1,6 @@
 from .enum.EnergyType import EnergyType
 from .enum.OrbStatus import OrbStatus
+from .EnergyEntity import EnergyEntity
 import random
 
 class OrbEntity:
@@ -50,10 +51,10 @@ class OrbEntity:
         """
         if selected_type is None or selected_type = EnergyType.ANY:
             self.status = OrbStatus.SPENT
-            return random.choice(self.types)
+            return new EnergyEntity(random.choice(self.types),self)
         elif selected_type in self.types:
             self.status = OrbStatus.SPENT
-            return selected_type
+            return new EnergyEntity(selected_type,self)
         else:
             raise Exception("The orb cannot generate that type of energy")
         
