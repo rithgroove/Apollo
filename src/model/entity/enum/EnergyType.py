@@ -7,6 +7,8 @@ class EnergyType(Enum):
     
     Attributes:
     -----------
+    ANY : str
+        "Any", is not a type, means that any color can be spent for this requirement.
     FIRE : str
         "Fire"
     WATER : str
@@ -14,7 +16,7 @@ class EnergyType(Enum):
     Earth : str
         "Earth"    
     """
-    ANY  = "ANY"    
+    ANY  = "Any"    
     FIRE = "Fire"
     WATER = "Water"
     EARTH = "Earth" 

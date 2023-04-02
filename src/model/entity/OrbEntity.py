@@ -35,8 +35,6 @@ class OrbEntity:
         if (self.types is None):
             self.types = []
         self.status = OrbStatus.READY
-        self.max_capacity = 10
-        self.current_capacity = 0
         
     def harvest_energy(self, selected_type= None):
         """
