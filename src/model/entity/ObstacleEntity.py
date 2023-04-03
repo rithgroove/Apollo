@@ -3,16 +3,20 @@ class ObstacleEntity:
     Obstacle entity represents a physical obstruction in the game map that units cannot pass through.
     """
 
-    def __init__(self, x: int, y: int, , obstacle_type: str):
+    def __init__(self, name:str, x : int, y :int , width:int, length: int , obstacle_type: str):
         """
         Initialize the Obstacle object.
-
+        :param name: the name of this obstacle
         :param x: X coordinate of the obstacle on the map.
         :param y: Y coordinate of the obstacle on the map.
+        :param width: how many x tiles does this object occupies
+        :param length: how many y tiles does this object occupies
         :param obstacle_type: Type of the obstacle, e.g. "wall", "tree", etc.
         """
-        self.x = x
-        self.y = y
+        self.name = name 
+        self.position = (x,y)
+        self.width = width
+        self.length = length
         self.obstacle_type = obstacle_type
 
     def get_coordinates(self) -> tuple[int, int]:
@@ -21,7 +25,7 @@ class ObstacleEntity:
 
         :return: Tuple containing X and Y coordinates of the obstacle.
         """
-        return self.x, self.y
+        return self.position
 
     def get_obstacle_type(self) -> str:
         """
@@ -37,4 +41,9 @@ class ObstacleEntity:
 
         :return: String representing the obstacle.
         """
-        return f"{self.obstacle_type} at ({self.x}, {self.y})"
+        text  =  "[Obstacle]\n"
+        text += f"name          = {self.name}\n"
+        text += f"position      = ({self.position[0]},{self.position[1]})\n"
+        text += f"dimension     = ({self.width},{self.length})\n"
+        text += f"obstacle type = {self.obstacle_type}\n"
+        return text
