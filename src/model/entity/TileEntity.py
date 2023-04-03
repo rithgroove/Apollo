@@ -23,6 +23,24 @@ class TileEntity:
         List of buff that is positioned in this tile
     blocked : bool
         a boolean that mark this tile blocked or not
+
+
+    Methods:
+    -----------
+    def __init__(self, name, position, terrainType, blocked = False)
+        Construct a tile
+
+    getLogicalPosition(self):
+        return the x and y coordinate of this tile
+
+    def getHeight(self):
+        return the elevation of the tile
+
+    def is_passable(self,player):
+        a method to check if this tile is passable
+
+    is_unit_exist(self,unit = None):
+        a method to return if the unit exist in the tiles. If unit is none, then return whether there's a unit in this tile or not.
     """
     
     def __init__(self, name, position, terrainType, blocked = False):
@@ -52,24 +70,25 @@ class TileEntity:
     """
         return self.position[2]
 
-    def is_passable(self,player):
+    def is_passable(self,player = None):
     """
         a method to check if this tile is passable
         ---
         return:
             bool is_passable (true = passable, false = unpassable)
     """
-        for unit in self.units:
-            if (unit.player != player):
-                return False
-        for obstacle in self.obstacles:
-            if not obstacles.is_passable:
-                return False
+        if player not is None:
+            for unit in self.units:
+                if (unit.player != player):
+                    return False
+            for obstacle in self.obstacles:
+                if not obstacles.is_passable:
+                    return False
         return not self.blocked
 
     def is_unit_exist(self,unit = None):
     """
-        a method to return if a unit exist in the tiles. 
+        a method to return if the unit exist in the tiles. 
         if unit parameter is not defined, 
         this method will return if there's any unit on this tile (occupied). 
         ---
@@ -80,3 +99,17 @@ class TileEntity:
             return len(self.units) > 0
         else:
             return unit in self.units
+
+    def __str__(self):
+        """
+        Get the string of this tile entity
+
+        :return: String representing the tile.
+        """
+        text  = "[Tile]\n"
+        text += f"Name      : {self.name}\n"
+        text += f"Position  : ({self.position[0]},{self.position[1]})\n"
+        text += f"Elevation : {self.position[2]}\n"
+        text += f"Type      : {self.terrainType}\n"
+        text += f"Passable  : {self.is_passable()}\n"
+        return text

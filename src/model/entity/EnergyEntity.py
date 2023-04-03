@@ -17,7 +17,7 @@ class EnergyEntity:
         Constructs a new energy instance
     """
     
-    def __init__(self, name, energyType, source):
+    def __init__(self, name:str, energyType:EnergyType, source):
         """
         Constructs a new energy instance
         
@@ -33,4 +33,18 @@ class EnergyEntity:
         self.name = name
         self.type = energyType 
         self.source = source
-        
+    
+    def __str__(self):
+        """
+        Get the string of this energy entity
+
+        :return: String representing the energy.
+        """
+        text  = "[Energy]\n"
+        text += f"Name   : {self.name}\n"
+        text += f"Status : {self.status}\n"
+        text += f"Type   : {self.type}\n"
+        if (self.source is not none):
+            text += f"Source :\n"
+            text += str(self.source)
+        return text

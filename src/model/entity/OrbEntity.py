@@ -29,7 +29,7 @@ class OrbEntity:
         A method to check whether the orb produce multiple types of energy.
     """
     
-    def __init__(self, name, types):
+    def __init__(self, name:str, types):
         """
         Constructs a new Orb instance with that can produce the energy of the types given.
 
@@ -84,3 +84,17 @@ class OrbEntity:
         if len(self.types) > 1:
             return True
         return False
+
+    def __str__(self):
+        """
+        Get the string representation of the Orb.
+
+        :return: String representing the orb.
+        """
+        text  = "[Orb]\n"
+        text += f"Name   : {self.name}\n"
+        text += f"Status : {self.status}\n"
+        text += f"Types  :\n"
+        for energyType in self.types:
+            text += f" - {energyType.name}\n"
+        return text
