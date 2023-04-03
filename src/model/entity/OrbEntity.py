@@ -30,6 +30,16 @@ class OrbEntity:
     """
     
     def __init__(self, name, types):
+        """
+        Constructs a new Orb instance with that can produce the energy of the types given.
+
+        Parameters:
+        ---
+        name : str
+            The name of the orb
+        types : Array of Energy Type
+            Type energy this orb generates
+        """
         self.name = name
         self.types = types 
         if (self.types is None):
