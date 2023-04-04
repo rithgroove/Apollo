@@ -43,9 +43,9 @@ class EnergyEntity:
         """
         text  = "[Energy]\n"
         text += f"Name   : {self.name}\n"
-        text += f"Status : {self.status}\n"
         text += f"Type   : {self.type}\n"
-        if (self.source is not none):
-            text += f"Source :\n"
-            text += str(self.source)
+        if (self.source is not None):
+            text += f"Source :\n\t"
+            temp = str(self.source).replace("\n","\n\t")
+            text += temp
         return text

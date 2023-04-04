@@ -53,12 +53,13 @@ class OrbEntity:
 
         :param selected_type: The type of energy the player select. If None was selected, return a random energy this orb can generate.
         """
-        if selected_type is None or selected_type = EnergyType.ANY:
+        if selected_type is None or selected_type == EnergyType.ANY:
             self.status = OrbStatus.SPENT
-            return new EnergyEntity(random.choice(self.types),self)
+            selected = random.choice(self.types)
+            return EnergyEntity(selected,selected,self)
         elif selected_type in self.types:
             self.status = OrbStatus.SPENT
-            return new EnergyEntity(selected_type,self)
+            return EnergyEntity(selected_type,self)
         else:
             raise Exception("The orb cannot generate that type of energy")
         

@@ -10,8 +10,8 @@ class MapEntity:
         A 2D list of TileEntities representing the tiles on the game map.
     width : int
         The width of the game map.
-    height : int
-        The height of the game map.
+    length : int
+        The length of the game map.
 
     Methods:
     --------
@@ -31,36 +31,25 @@ class MapEntity:
         Returns a list of coordinates (as tuples) that are within the given distance of the given (x, y) coordinates on the map.
     """
 
-    def __init__(self, width: int, height: int):
+    def __init__(self, width: int, length: int):
         """
         Constructs a new MapEntity instance with the given width and height.
 
-        Parameters:
-        -----------
-        width : int
-            The width of the game map.
-        height : int
-            The height of the game map.
+        :param width: The width of the game map.
+        :param length : The height of the game map.
         """
-        self.tiles = [[TileEntity() for y in range(height)] for x in range(width)]
+         for y in range(height)] for x in range(width)]
         self.width = width
-        self.height = height
+        self.length = length
 
     def get_tile(self, x: int, y: int) -> TileEntity:
         """
         Returns the TileEntity at the given (x, y) coordinates on the map.
 
-        Parameters:
-        -----------
-        x : int
-            The x-coordinate of the tile to retrieve.
-        y : int
-            The y-coordinate of the tile to retrieve.
+        :param x:The x-coordinate of the tile to retrieve.
+        :param y:The y-coordinate of the tile to retrieve.
 
-        Returns:
-        --------
-        tile : TileEntity
-            The TileEntity at the given coordinates.
+        :return: The TileEntity at the given coordinates.
         """
         return self.tiles[x][y]
 

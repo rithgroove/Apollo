@@ -17,13 +17,9 @@ class BuffEntity:
         """
         Constructs a new Buff instance.
 
-        Parameters:
-        -----------
-        name : str
-            The name of the buff.
-        duration : int
-            The number of turns the buff lasts for.
-        effects : List[Tuple[str, float]]
+        :param name: String containinge the name of the buff.
+        :param duration: The number of turns the buff lasts for.
+        :param effects: List[Tuple[str, float]] 
             A list of tuples representing the effects of the buff.
             Each tuple contains a string representing the name of the effect and
             a float representing the magnitude of the effect.
@@ -35,6 +31,7 @@ class BuffEntity:
         self.status = "active"
 
     def update(self, unit):
+        print("crap")
 
     def step(self):
         self.elapsed += 1
