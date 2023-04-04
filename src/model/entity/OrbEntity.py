@@ -56,10 +56,10 @@ class OrbEntity:
         if selected_type is None or selected_type == EnergyType.ANY:
             self.status = OrbStatus.SPENT
             selected = random.choice(self.types)
-            return EnergyEntity(selected,selected,self)
+            return EnergyEntity(selected.value,selected,self)
         elif selected_type in self.types:
             self.status = OrbStatus.SPENT
-            return EnergyEntity(selected_type,self)
+            return EnergyEntity(selected_type.value,selected_type,self)
         else:
             raise Exception("The orb cannot generate that type of energy")
         

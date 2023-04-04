@@ -87,7 +87,7 @@ class TileEntity:
         """
         if len(self.units) > 0:
             return False
-        if len(self.obstacles) >0
+        if len(self.obstacles) > 0:
             return False
         return not self.blocked
 
@@ -100,7 +100,7 @@ class TileEntity:
 
         :return: bool is_passable (true = passable, false = unpassable)
         """
-        if player not is None:
+        if player is not None:
             for unit in self.units:
                 if (unit.player != player):
                     return False
