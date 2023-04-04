@@ -12,6 +12,8 @@ class MapEntity:
         The width of the game map.
     height : int
         The height of the game map.
+
+    Methods:
     --------
     __init__(self, width:int, height:int)
         Constructs a new MapEntity instance with the given width and height.

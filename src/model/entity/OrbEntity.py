@@ -15,6 +15,8 @@ class OrbEntity:
         Type energy this orb generates
     status : OrbStatus
         The status of the orbs 
+
+    Methods:
     --------
     __init__(self, types: type)
         Constructs a new Orb instance with that can produce the energy of the types given.
@@ -33,12 +35,8 @@ class OrbEntity:
         """
         Constructs a new Orb instance with that can produce the energy of the types given.
 
-        Parameters:
-        ---
-        name : str
-            The name of the orb
-        types : Array of Energy Type
-            Type energy this orb generates
+        :param name: the name of the orb.
+        :param types: Array of EnergyType this orb can generates.
         """
         self.name = name
         self.types = types 
@@ -52,10 +50,8 @@ class OrbEntity:
         Will raise an exception if selected type is not a member of the types attribute.
 
         Parameters:
-        ---
-        selected_type : EnergyType
-            Default value = None
-            the selected energy type.
+
+        :param selected_type: The type of energy the player select. If None was selected, return a random energy this orb can generate.
         """
         if selected_type is None or selected_type = EnergyType.ANY:
             self.status = OrbStatus.SPENT
@@ -71,6 +67,8 @@ class OrbEntity:
         A method to refresh the orb, and fill it back with energy. Basically it change status from OrbStatus.SPENT to ready.
         This usually called in clean up phase, but some skills might be able to call this function.
         To avoid refershing a ready orb, this will throw exception if the orb does not require refresh.
+
+        :raise exception: if the status of the orb is not spent, will raise an exception.
         """
         if (self.status == OrbStatus.SPENT):
             self.status = OrbStatus.READY
@@ -80,6 +78,8 @@ class OrbEntity:
     def have_options(self):
         """
         A method to check whether the orb produce multiple types of energy. This is will indicates there will be a energy selection step before the orb produces energy.
+
+        :return: Boolean representing if the the player have options to harvest this orb.
         """
         if len(self.types) > 1:
             return True

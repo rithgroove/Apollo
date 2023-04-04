@@ -12,22 +12,23 @@ class EnergyEntity:
         Type of this energy
     source : anyObject
         origin of this energy
+
+    Methods:
     --------
     __init__(self, energytypes: EnergyType, source: anyObject)
         Constructs a new energy instance
+
+    __str__(self):
+        Return string representation of this energy
     """
     
     def __init__(self, name:str, energyType:EnergyType, source):
         """
         Constructs a new energy instance
-        
-        name : str
-            The name of the energy 
-        energyType : 
-            Type of this energy
-        source : anyObject
-            origin of this energy
-        --------
+    
+        :param name: the name of the energy.
+        :param energyType: Type of this energy.
+        :param source: origin of this energy.
         """
 
         self.name = name
@@ -38,7 +39,7 @@ class EnergyEntity:
         """
         Get the string of this energy entity
 
-        :return: String representing the energy.
+        :return: String representing the energy instance.
         """
         text  = "[Energy]\n"
         text += f"Name   : {self.name}\n"
