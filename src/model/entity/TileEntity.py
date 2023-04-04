@@ -24,7 +24,6 @@ class TileEntity:
     blocked : bool
         a boolean that mark this tile blocked or not
 
-
     Methods:
     -----------
     def __init__(self, name, position, terrainType, blocked = False)
@@ -36,6 +35,9 @@ class TileEntity:
     def getHeight(self):
         return the elevation of the tile
 
+    def is_occupiable(self):
+        a method to check if this tile is empty and can be occupied
+
     def is_passable(self,player):
         a method to check if this tile is passable
 
@@ -44,6 +46,14 @@ class TileEntity:
     """
     
     def __init__(self, name, position, terrainType, blocked = False):
+        """
+        Constructs a new tile
+
+        :param name: The name of the tile.
+        :param postion: Tuple of x,y,z position of the tile (z is the elevation of the tile)
+        :param terrainType: terrainType enumeration to set the type of the tile
+        :param blocked: boolean that marked if this tile is blocked or not (lava tiles for example)
+        """
         self.name = name
         self.terrainType = terrainType 
         self.blocked = blocked
@@ -53,30 +63,43 @@ class TileEntity:
         self.buff = []
         
     def getLogicalPosition(self):
-    """
+        """
         get the x y position of this tile. 
-        ---
-        return:
-            (int x, int y)
-    """
+        
+        :return: (int x, int y)
+        """
         return (self.position[0],self.position[1])
 
     def getHeight(self):
-    """ 
+        """ 
         get the elevation of the tile.
-        ---
-        return:
-            int height
-    """
+        
+        :return: int representing elevation of this tile
+        """
         return self.position[2]
 
+    def is_occupiable(self):
+        """
+        A method to check if this tile is empty and can be occupied. 
+        This methods is useful to filter out tiles where the unit can move to.
+
+        :return: bool is_occupiable (true = occupiable, false = unoccupiable)
+        """
+        if len(self.units) > 0:
+            return False
+        if len(self.obstacles) >0
+            return False
+        return not self.blocked
+
     def is_passable(self,player = None):
-    """
-        a method to check if this tile is passable
-        ---
-        return:
-            bool is_passable (true = passable, false = unpassable)
-    """
+        """
+        a method to check if this tile is passable for the selected player.
+        If player is none, will return if the tile blocked for all player.
+        
+        :param player: The player that we wanted to check.
+
+        :return: bool is_passable (true = passable, false = unpassable)
+        """
         if player not is None:
             for unit in self.units:
                 if (unit.player != player):
@@ -87,14 +110,14 @@ class TileEntity:
         return not self.blocked
 
     def is_unit_exist(self,unit = None):
-    """
+        """
         a method to return if the unit exist in the tiles. 
         if unit parameter is not defined, 
         this method will return if there's any unit on this tile (occupied). 
-        ---
-        return:
-            bool unit_exists (true = unit is here, false = unit not here)
-    """
+        
+
+        :return: bool unit_exists (true = unit is here, false = unit not here)
+        """
         if unit is None:
             return len(self.units) > 0
         else:
