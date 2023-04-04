@@ -62,6 +62,14 @@ class TileEntity:
         self.obstacles = []
         self.buff = []
         
+    def set_obstacle(self,obstacle):
+        self.obstacles.append(obstacle);
+
+    def getShortString(self):
+        if len(self.obstacles) > 0:
+            return self.obstacles[0].name[0]
+        return self.terrainType.value[0]
+
     def getLogicalPosition(self):
         """
         get the x y position of this tile. 

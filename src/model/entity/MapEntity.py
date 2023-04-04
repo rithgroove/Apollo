@@ -39,6 +39,7 @@ class MapEntity:
         :param length : The height of the game map.
         """
         self.tiles = tiles
+        self.obstacles = []
         self.width = len(tiles)
         self.length = len(tiles[0])
 
@@ -54,7 +55,7 @@ class MapEntity:
         for i in range(self.width):
             temp = ""
             for j in range(self.length):
-                temp += f"{self.tiles[i][j].terrainType.value[0]} "
+                temp += f"{self.tiles[i][j].getShortString()} "
             temp+="\n"
             map_structure += temp
         text += map_structure
@@ -85,6 +86,13 @@ class MapEntity:
             The TileEntity to set at the given coordinates.
         """
         self.tiles[x][y] = tile
+
+    def set_obstacle(self,obstacle):
+        self.obstacles.append(obstacle)
+        for i in range (obstacle.position[0],obstacle.position[0]+obstacle.width):
+            for j in range (obstacle.position[1],obstacle.position[1]+obstacle.length):
+                self.tiles[i][j].set_obstacle(obstacle);
+
 
     # def get_adjacent_tiles(self, x: int, y: int) -> List[TileEntity]:
     #     """
