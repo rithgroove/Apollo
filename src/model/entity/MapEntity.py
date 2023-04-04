@@ -31,16 +31,34 @@ class MapEntity:
         Returns a list of coordinates (as tuples) that are within the given distance of the given (x, y) coordinates on the map.
     """
 
-    def __init__(self, width: int, length: int):
+    def __init__(self, tiles):
         """
         Constructs a new MapEntity instance with the given width and height.
 
         :param width: The width of the game map.
         :param length : The height of the game map.
         """
-         for y in range(height)] for x in range(width)]
-        self.width = width
-        self.length = length
+        self.tiles = tiles
+        self.width = len(tiles)
+        self.length = len(tiles[0])
+
+    def __str__(self):
+        """
+        Get the string of this tile entity
+
+        :return: String representing the tile.
+        """
+        text  = f"[Map Entity]\n"
+        text += f"Map Structure :\n"
+        map_structure = ""
+        for i in range(self.width):
+            temp = ""
+            for j in range(self.length):
+                temp += f"{self.tiles[i][j].terrainType.value[0]} "
+            temp+="\n"
+            map_structure += temp
+        text += map_structure
+        return text
 
     def get_tile(self, x: int, y: int) -> TileEntity:
         """
@@ -68,24 +86,24 @@ class MapEntity:
         """
         self.tiles[x][y] = tile
 
-    def get_adjacent_tiles(self, x: int, y: int) -> List[TileEntity]:
-        """
-        Returns a list of adjacent TileEntities to the given (x, y) coordinates on the map.
+    # def get_adjacent_tiles(self, x: int, y: int) -> List[TileEntity]:
+    #     """
+    #     Returns a list of adjacent TileEntities to the given (x, y) coordinates on the map.
 
-        Parameters:
-        -----------
-        x : int
-            The x-coordinate of the tile to get the adjacent tiles of.
-        y : int
-            The y-coordinate of the tile to get the adjacent tiles of.
+    #     Parameters:
+    #     -----------
+    #     x : int
+    #         The x-coordinate of the tile to get the adjacent tiles of.
+    #     y : int
+    #         The y-coordinate of the tile to get the adjacent tiles of.
 
-        Returns:
-        --------
-        adjacent_tiles : List of TileEntity
-            A list of TileEntities that are adjacent to the given tile.
-        """
-        adjacent_tiles = []
-        if x > 0:
-            adjacent_tiles.append(self.get_tile(x - 1, y))
-        if x < self.width - 1:
-            adjacent_tiles.append(self.get_tile(x + 1
+    #     Returns:
+    #     --------
+    #     adjacent_tiles : List of TileEntity
+    #         A list of TileEntities that are adjacent to the given tile.
+    #     """
+    #     adjacent_tiles = []
+    #     if x > 0:
+    #         adjacent_tiles.append(self.get_tile(x - 1, y))
+    #     if x < self.width - 1:
+    #         adjacent_tiles.append(self.get_tile(x + 1,y))
