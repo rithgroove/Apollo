@@ -44,6 +44,6 @@ class ObstacleEntity:
         text  =  "[Obstacle]\n"
         text += f"name          = {self.name}\n"
         text += f"position      = ({self.position[0]},{self.position[1]})\n"
-        text += f"dimension     = ({self.width},{self.length})\n"
+        text += f"dimension     = {self.width}x{self.length}\n"
         text += f"obstacle type = {self.obstacle_type}\n"
         return text
