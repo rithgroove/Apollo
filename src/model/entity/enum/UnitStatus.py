@@ -1,6 +1,6 @@
 from enum import Enum
 
-class BuffStatus(Enum):
+class UnitStatus(Enum):
     """
     A enumeration class for the status of the Buff
     
@@ -11,7 +11,6 @@ class BuffStatus(Enum):
     EXPIRED : str
         Value = "Expired". This means that the buff has expired.
     """
-    
-    COOLINGDOWN = "Cooling Down" 
-    READY = "Ready for Summon" 
+    COOLINGDOWN = "CoolingDown" 
+    READY = "Ready" 
     DEPLOYED = "Deployed"

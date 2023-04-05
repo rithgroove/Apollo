@@ -1,8 +1,5 @@
-from typing import List
-from .enums import UnitStatus, AttackType
-from .buff import Buff
-from .orb import OrbEntity
-
+from .enum.UnitStatus import UnitStatus
+from .enum.AttackType import AttackType
 
 class UnitEntity:
     """
@@ -57,7 +54,7 @@ class UnitEntity:
     is_alive(self)
         Returns True if the unit is still alive (has hit points remaining), False otherwise.
     """
-    def __init__(self, name: str, max_hp: int, pow: int, armor: int, move: int, attack_type: AttackType, unit_cost, cooldown = 3,unit_code ):
+    def __init__(self, name: str, max_hp: int, power: int, armor: int, move: int, attack_type: AttackType, unit_cost,unit_code, cooldown = 3):
         """
         Constructs a new UnitEntity instance with the specified attributes.
 
@@ -72,12 +69,13 @@ class UnitEntity:
         self.name = name
         self.max_hp = max_hp
         self.hp = max_hp
-        self.attack = attack
-        self.defense = defense
-        self.speed = speed
-        self.status = UnitStatus.NORMAL
+        self.power = power
+        self.armor = armor
+        self.move = move
+        self.status = UnitStatus.READY
         self.attack_type = attack_type
         self.cooldown = cooldown
+        self.unit_cost = unit_cost
         self.unit_code = unit_code
 
     def receive_damage(self, damage: int):
@@ -97,3 +95,25 @@ class UnitEntity:
 
     def short_string(self):
         return name[0]
+
+    def get_energy_str(self):
+        text = ""
+        first = True
+        for energy in self.unit_cost :
+            if (first):
+                first = False
+            else:
+                text += ","
+            text += f"{energy.type.value[0]}"
+        return text
+
+    def __str__(self):
+        text  = f"[Unit]\n"
+        text += f"Name   : {self.name} ({self.unit_code})\n"
+        text += f"Cost   : {self.get_energy_str()}\n"
+        text += f"HP     : {self.hp}/{self.max_hp}\n"
+        text += f"POW    : {self.power} ({self.attack_type.value})\n"
+        text += f"ARM    : {self.armor}\n"
+        text += f"MOV    : {self.move}\n"
+        text += f"Status : {self.status.value}\n"
+        return text
