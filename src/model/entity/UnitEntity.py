@@ -57,7 +57,7 @@ class UnitEntity:
     is_alive(self)
         Returns True if the unit is still alive (has hit points remaining), False otherwise.
     """
-    def __init__(self, name: str, max_hp: int, pow: int, armor: int, move: int, attack_type: AttackType):
+    def __init__(self, name: str, max_hp: int, pow: int, armor: int, move: int, attack_type: AttackType, unit_cost, cooldown = 3,unit_code ):
         """
         Constructs a new UnitEntity instance with the specified attributes.
 
@@ -77,6 +77,8 @@ class UnitEntity:
         self.speed = speed
         self.status = UnitStatus.NORMAL
         self.attack_type = attack_type
+        self.cooldown = cooldown
+        self.unit_code = unit_code
 
     def receive_damage(self, damage: int):
         """
@@ -91,8 +93,7 @@ class UnitEntity:
         self.hp -= damage_taken
         if self.hp <= 0:
             self.hp = 0
-            self.status = UnitStatus.DEAD
+            self.status = UnitStatus.COOLINGDOWN
 
-    def add_buff(self, buff: Buff):
-        """
-        Adds
+    def short_string(self):
+        return name[0]
