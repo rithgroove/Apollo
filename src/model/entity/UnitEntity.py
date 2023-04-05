@@ -14,8 +14,10 @@ class UnitEntity:
         The name of the unit
     max_hp : int
         The maximum hit points of the unit
-    attack : int
-        The attack power of the unit
+    hp : int
+        current hit points of the unit
+    pow : int
+        The power of the unit
     armor : int
         how many damage will the unit block
     move : int
@@ -55,24 +57,17 @@ class UnitEntity:
     is_alive(self)
         Returns True if the unit is still alive (has hit points remaining), False otherwise.
     """
-    def __init__(self, name: str, max_hp: int, attack: int, defense: int, speed: int, attack_type: AttackType):
+    def __init__(self, name: str, max_hp: int, pow: int, armor: int, move: int, attack_type: AttackType):
         """
         Constructs a new UnitEntity instance with the specified attributes.
 
-        Parameters:
-        -----------
-        name : str
-            The name of the unit.
-        max_hp : int
-            The maximum hit points of the unit.
-        attack : int
-            The attack power of the unit.
-        defense : int
-            The defense power of the unit.
-        speed : int
-            The speed of the unit.
-        attack_type : AttackType
-            The attack type of the unit (melee or ranged).
+        :param name: The name of the unit.
+        :param max_hp: The maximum hit points of the unit.
+        :param pow: The power of the unit.
+        :param attack_type: used on normal attack skill (for making rock paper scissor)
+        :param armor: The amount of damage blocked.
+        :param move: The number of tile the unit can move for a single action 
+        :param action_point: The number of action the unit can do per turn.
         """
         self.name = name
         self.max_hp = max_hp
@@ -82,8 +77,6 @@ class UnitEntity:
         self.speed = speed
         self.status = UnitStatus.NORMAL
         self.attack_type = attack_type
-        self.orbs = []
-        self.buffs = []
 
     def receive_damage(self, damage: int):
         """
