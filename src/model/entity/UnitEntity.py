@@ -16,10 +16,10 @@ class UnitEntity:
         The maximum hit points of the unit
     attack : int
         The attack power of the unit
-    defense : int
-        The defense power of the unit
-    speed : int
-        The speed of the unit
+    armor : int
+        how many damage will the unit block
+    move : int
+        The movement speed of the unit
     status : UnitStatus
         The current status of the unit
     attack_type : AttackType
@@ -28,6 +28,8 @@ class UnitEntity:
         The orbs owned by the unit
     buffs : List[Buff]
         The buffs currently affecting the unit
+
+    Methods
     --------
     __init__(self, name: str, max_hp: int, attack: int, defense: int, speed: int, attack_type: AttackType)
         Constructs a new UnitEntity instance with the specified attributes.

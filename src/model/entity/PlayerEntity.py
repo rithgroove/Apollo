@@ -6,14 +6,8 @@ class PlayerEntity:
     -----------
     name : str
         The name of the player
-    health : int
-        The current health of the player
-    max_health : int
-        The maximum health of the player
-    energy : int
+    energy : List of Energy
         The current energy of the player
-    max_energy : int
-        The maximum energy of the player
     armor : int
         The armor value of the player
     damage : int
@@ -42,89 +36,55 @@ class PlayerEntity:
         Returns True if the player is alive (health > 0), False otherwise.
     """
     
-    def __init__(self, name: str, health: int, energy: int, armor: int, damage: int, level: int):
+    def __init__(self, name: str, units, orbs, gateway):
         """
         Constructs a new PlayerEntity instance.
 
-        Parameters:
-        ---
-        name : str
-            The name of the player
-        health : int
-            The current health of the player
-        energy : int
-            The current energy of the player
-        armor : int
-            The armor value of the player
-        damage : int
-            The damage value of the player
-        level : int
-            The current level of the player
+        :param name : The name of the player
+        :param units: List of units this player control
+        :param orbs: The orbs that player started with 
+        :param gateway: The main gateway the player will use
         """
         self.name = name
-        self.health = health
-        self.max_health = health
-        self.energy = energy
-        self.max_energy = energy
-        self.armor = armor
-        self.damage = damage
-        self.level = level
+        self.units = units
+        self.orbs = orbs
+        self.energy_pool = []
+        self.main_gateway = gateway
+        self.gateway = []
+        self.gateway.append(gateway)
+        self.glory = 0
 
-    def attack(self, target: UnitEntity):
+    def add_glory(self, additional_glory: int):
         """
-        Performs an attack on the target UnitEntity.
+        Methods to add glory to this player. 
+        Glory will be gained when:
+        - killing enemy units (1 points)
+        - killing enemy leader (2 points)
+        - destroying enemy gateway (1 points)
+        - destroying main enemy gateay (3 points)
 
-        Parameters:
-        ---
-        target : UnitEntity
-            The target UnitEntity to attack.
+        :param additional_glory: the amount of additional_glory
         """
-        damage = self.damage - target.armor
-        if damage < 0:
-            damage = 0
-        target.receive_damage(damage)
+        self.glory += additional_glory
 
-    def receive_damage(self, amount: int):
+    def is_winning(self):
         """
-        Receives damage from an attack.
+        Methods to check if this player is winning the game
 
-        Parameters:
-        ---
-        amount : int
-            The amount of damage received.
+        :return: true if the player won the game.
         """
-        self.health -= amount
-        if self.health < 0:
-            self.health = 0
+        if glory >= 5:
+            return True
+        if len(orbs >= 10):
+            return True
+        return False
 
-    def heal(self, amount: int):
+    def is_elimininated(self):
         """
-        Heals the player for the given amount.
+        Methods to check if this player have lost and eliminated from the game
 
-        Parameters:
-        ---
-        amount : int
-            The amount of health to heal.
+        :return: true if the player lost the game
         """
-        self.health += amount
-        if self.health > self.max_health:
-            self.health = self.max_health
-
-    def restore_energy(self, amount: int):
-        """
-        Restores energy to the player for the given amount.
-
-        Parameters:
-        ---
-        amount : int
-            The amount of energy to restore.
-        """
-        self.energy += amount
-        if self.energy > self.max_energy:
-            self.energy = self.max_energy
-
-    def is_alive(self):
-        """
-        Returns True if the player is alive (health > 0), False otherwise.
-        """
-        return self.health > 0
+        if len(self.units) == 0 and self.main_gateway is None and len(self.gateway) == 0:
+            return True
+        return False

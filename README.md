@@ -35,3 +35,4 @@ The main goal is to create a small tactical turn based game environment for rein
     - Customizable warband
     - additional orbs
 
+P.S: Checkout the wiki for more information about the project :D 
