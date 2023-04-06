@@ -54,6 +54,13 @@ class PlayerEntity:
         self.gateway.append(gateway)
         self.glory = 0
 
+    def __str__(self):
+        text  = f"[Player]\n"
+        text += f"name   = {self.name}\n"
+        text += f"status = {self.status}\n"
+
+        return text
+
     def add_glory(self, additional_glory: int):
         """
         Methods to add glory to this player. 
