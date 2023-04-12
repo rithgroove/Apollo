@@ -33,3 +33,11 @@ class GameState:
         self.units = units
         self.map = map_entity
         self.turn_number = turn_number
+
+    def __str__(self):
+        text  = f"[Gamestate]\n"
+        text += f"Turn              = {self.turn_number}\n"
+        text += f"Number of players = {len(self.players)}\n"
+        text += f"Number of units   = {len(self.units)}\n"
+        text += f"Map Size          = {self.map.width} x {self.map.length}\n"
+        return text
